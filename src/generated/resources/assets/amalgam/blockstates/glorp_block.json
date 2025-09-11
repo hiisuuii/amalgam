@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "amalgam:block/glorp_block"
+    }
+  }
+}

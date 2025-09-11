@@ -1,0 +1,13 @@
+{
+  "amalgam.itemGroup.amalgam": "Amalgam",
+  "block.amalgam.glorp_block": "Glorp Block",
+  "command.amalgam.name.clear": "Cleared %1$s's name",
+  "command.amalgam.name.set": "Changed %1$s's name to \"%2$s\"",
+  "command.amalgam.skin.clear": "Changed %1$s's skin",
+  "command.amalgam.skin.set": "Changed %1$s's skin to %2$s's skin",
+  "item.amalgam.ambrosia": "Ambrosia",
+  "item.amalgam.enchanting_powder": "Enchanting Powder",
+  "item.amalgam.glorp": "Glorp",
+  "item.amalgam.magic_feather": "Magic Feather",
+  "item.amalgam.magic_steak": "Magic Steak"
+}
