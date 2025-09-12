@@ -45,6 +45,7 @@ public class TeleportGatewayEntranceEntity extends Entity {
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
+        Amalgam.LOGGER.info("Ouch!");
         if (this.level().isClientSide || this.isRemoved()) {
             return true;
         } else if (this.isInvulnerableTo(source)) {
