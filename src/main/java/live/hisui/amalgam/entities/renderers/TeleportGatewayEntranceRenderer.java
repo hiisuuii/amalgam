@@ -3,7 +3,7 @@ package live.hisui.amalgam.entities.renderers;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import live.hisui.amalgam.entities.TeleportGatewayEntity;
+import live.hisui.amalgam.entities.TeleportGatewayEntranceEntity;
 import live.hisui.amalgam.util.Util;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -13,11 +13,11 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import org.joml.Matrix4f;
 
-public class TeleportGatewayRenderer extends EntityRenderer<TeleportGatewayEntity> {
-    private static final ResourceLocation TEXTURE_LOCATION = Util.modLoc("textures/entity/teleport_gateway.png");
+public class TeleportGatewayEntranceRenderer extends EntityRenderer<TeleportGatewayEntranceEntity> {
+    private static final ResourceLocation TEXTURE_LOCATION = Util.modLoc("textures/entity/teleport_gateway/entrance.png");
     private static final RenderType RENDER_TYPE = RenderType.entityCutout(TEXTURE_LOCATION);
 
-    public TeleportGatewayRenderer(EntityRendererProvider.Context context) {
+    public TeleportGatewayEntranceRenderer(EntityRendererProvider.Context context) {
         super(context);
         this.shadowRadius = 0.5f;
     }
@@ -38,7 +38,7 @@ public class TeleportGatewayRenderer extends EntityRenderer<TeleportGatewayEntit
 
 
     @Override
-    public void render(TeleportGatewayEntity entity, float entityYaw, float partialTicks,
+    public void render(TeleportGatewayEntranceEntity entity, float entityYaw, float partialTicks,
                        PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
         poseStack.pushPose();
 
@@ -72,7 +72,7 @@ public class TeleportGatewayRenderer extends EntityRenderer<TeleportGatewayEntit
     }
 
     @Override
-    public ResourceLocation getTextureLocation(TeleportGatewayEntity entity) {
+    public ResourceLocation getTextureLocation(TeleportGatewayEntranceEntity entity) {
         return TEXTURE_LOCATION;
     }
 }

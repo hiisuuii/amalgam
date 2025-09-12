@@ -4,6 +4,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -11,15 +13,20 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 
-public class TeleportGatewayEntity extends Entity {
+public class TeleportGatewayEntranceEntity extends Entity {
 
-    protected static final EntityDataAccessor<Integer> DATA_ID_HURT = SynchedEntityData.defineId(TeleportGatewayEntity.class, EntityDataSerializers.INT);
-    protected static final EntityDataAccessor<Float> DATA_ID_DAMAGE = SynchedEntityData.defineId(TeleportGatewayEntity.class, EntityDataSerializers.FLOAT);
+    protected static final EntityDataAccessor<Integer> DATA_ID_HURT = SynchedEntityData.defineId(TeleportGatewayEntranceEntity.class, EntityDataSerializers.INT);
+    protected static final EntityDataAccessor<Float> DATA_ID_DAMAGE = SynchedEntityData.defineId(TeleportGatewayEntranceEntity.class, EntityDataSerializers.FLOAT);
 
-    public TeleportGatewayEntity(EntityType<?> entityType, Level level) {
+    public TeleportGatewayEntranceEntity(EntityType<?> entityType, Level level) {
         super(entityType, level);
     }
 
+    @Override
+    public InteractionResult interact(Player player, InteractionHand hand) {
+        // TODO: spawn exit gateway at top solid y in facing direction, tp player to it
+        return super.interact(player, hand);
+    }
 
     @Override
     public void tick() {

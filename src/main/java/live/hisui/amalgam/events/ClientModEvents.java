@@ -4,7 +4,7 @@ import live.hisui.amalgam.Amalgam;
 import live.hisui.amalgam.attachments.EnchantedBlocks;
 import live.hisui.amalgam.attachments.ModDataAttachments;
 import live.hisui.amalgam.entities.ModEntities;
-import live.hisui.amalgam.entities.renderers.TeleportGatewayRenderer;
+import live.hisui.amalgam.entities.renderers.TeleportGatewayEntranceRenderer;
 import live.hisui.amalgam.items.EnchantingPowderItem;
 import live.hisui.amalgam.items.ModItems;
 import net.minecraft.client.Minecraft;
@@ -28,7 +28,7 @@ public class ClientModEvents {
 
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
-        EntityRenderers.register(ModEntities.TELEPORT_GATEWAY.get(), TeleportGatewayRenderer::new);
+        EntityRenderers.register(ModEntities.TELEPORT_GATEWAY.get(), TeleportGatewayEntranceRenderer::new);
     }
 
     @SubscribeEvent
