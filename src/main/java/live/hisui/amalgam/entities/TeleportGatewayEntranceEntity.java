@@ -17,6 +17,8 @@ public class TeleportGatewayEntranceEntity extends Entity {
 
     protected static final EntityDataAccessor<Integer> DATA_ID_HURT = SynchedEntityData.defineId(TeleportGatewayEntranceEntity.class, EntityDataSerializers.INT);
     protected static final EntityDataAccessor<Float> DATA_ID_DAMAGE = SynchedEntityData.defineId(TeleportGatewayEntranceEntity.class, EntityDataSerializers.FLOAT);
+    protected static final EntityDataAccessor<Long> DATA_ID_AGE = SynchedEntityData.defineId(TeleportGatewayEntranceEntity.class, EntityDataSerializers.LONG);
+    private long age = 0;
 
     public TeleportGatewayEntranceEntity(EntityType<?> entityType, Level level) {
         super(entityType, level);
@@ -31,27 +33,14 @@ public class TeleportGatewayEntranceEntity extends Entity {
     @Override
     public void tick() {
         super.tick();
-
-        this.yRotO = this.getYRot();
-
-        this.setYRot(this.getYRot() + 1.0F);
-
-        this.setYHeadRot(this.getYRot());
-        this.setYBodyRot(this.getYRot());
-
-        if (this.getYRot() > 1_000_000F) {
-            float normalized = this.getYRot() % 360F;
-            this.setYRot(normalized);
-            this.yRotO = normalized;
+        age++;
+        if(this.age > 60 * 20) this.discard();
+        var newRot = this.getYRot() + 1.0f;
+        if(newRot >= 360){
+            newRot = 0;
         }
+        this.setYRot(newRot);
     }
-
-    @Override
-    public void setYRot(float yRot) {
-        // dont do the boundedness
-        this.yRot = yRot;
-    }
-
 
 
     @Override
@@ -99,6 +88,7 @@ public class TeleportGatewayEntranceEntity extends Entity {
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         builder.define(DATA_ID_DAMAGE, 0.0f);
         builder.define(DATA_ID_HURT, 0);
+        builder.define(DATA_ID_AGE, 0L);
     }
 
     @Override

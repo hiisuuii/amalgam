@@ -3,6 +3,7 @@ package live.hisui.amalgam.entities.renderers;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
+import live.hisui.amalgam.Amalgam;
 import live.hisui.amalgam.entities.TeleportGatewayEntranceEntity;
 import live.hisui.amalgam.util.Util;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -41,8 +42,9 @@ public class TeleportGatewayEntranceRenderer extends EntityRenderer<TeleportGate
     public void render(TeleportGatewayEntranceEntity entity, float entityYaw, float partialTicks,
                        PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
         poseStack.pushPose();
-    
-        poseStack.mulPose(Axis.YP.rotationDegrees(-entityYaw));
+
+        var rot = entity.getYRot();
+        poseStack.mulPose(Axis.YP.rotationDegrees(-rot));
         poseStack.translate(0.0D, 1.0D, 0.0D);
 
         VertexConsumer vertexConsumer = buffer.getBuffer(RENDER_TYPE);
