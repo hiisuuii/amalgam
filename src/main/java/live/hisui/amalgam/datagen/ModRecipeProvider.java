@@ -10,6 +10,7 @@ import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -20,6 +21,7 @@ public class ModRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(RecipeOutput recipeOutput) {
+
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, new ItemStack(ModItems.ENCHANTING_POWDER.get(), 3))
                 .requires(Tags.Items.GEMS_LAPIS)

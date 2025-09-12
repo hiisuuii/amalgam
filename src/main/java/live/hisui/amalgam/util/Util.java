@@ -1,6 +1,13 @@
 package live.hisui.amalgam.util;
 
+import live.hisui.amalgam.Amalgam;
+import net.minecraft.resources.ResourceLocation;
+
 public class Util {
+
+    public static ResourceLocation modLoc(String name) {
+        return ResourceLocation.fromNamespaceAndPath(Amalgam.MODID, name);
+    }
 
     public static String formatString(String input) {
         if (input == null || input.isEmpty()) {

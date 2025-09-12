@@ -37,11 +37,12 @@ public class ModItems {
     public static final DeferredItem<Item> MAGIC_FEATHER = ITEMS.registerItem("magic_feather",
             properties -> new MagicFeatherItem(properties.rarity(Rarity.RARE)
                     .durability(32).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE,true).stacksTo(1)));
-
-
+    public static final DeferredItem<Item> TELEPORT_SCROLL = ITEMS.registerItem("teleport_scroll",
+            properties -> new TeleportScrollItem(properties.rarity(Rarity.UNCOMMON).stacksTo(1)));
 
     // region BlockItems
-    public static final DeferredItem<BlockItem> GLORP_BLOCK = ITEMS.registerSimpleBlockItem(ModBlocks.GLORP_BLOCK);
+    public static final DeferredItem<BlockItem> GLORP_BLOCK = ITEMS.registerItem("glorp_block",
+            properties -> new BlockItem(ModBlocks.GLORP_BLOCK.get(), properties));
     // endregion
     public static void register(IEventBus modBus){
         ITEMS.register(modBus);

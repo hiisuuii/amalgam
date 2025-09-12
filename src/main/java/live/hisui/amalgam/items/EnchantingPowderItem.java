@@ -1,6 +1,5 @@
 package live.hisui.amalgam.items;
 
-import live.hisui.amalgam.Amalgam;
 import live.hisui.amalgam.attachments.ModDataAttachments;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -41,17 +40,46 @@ public class EnchantingPowderItem extends Item {
     }
 
     public static void makeParticles(Level level, BlockPos pos, RandomSource random){
-        double d0 = 0.5625;
-        var state = level.getBlockState(pos);
+        BlockState state = level.getBlockState(pos);
+        VoxelShape shape = state.getShape(level, pos);
 
-        for (Direction direction : Direction.values()) {
-            BlockPos blockpos = pos.relative(direction);
-            if (!state.isSolidRender(level, blockpos)) {
-                Direction.Axis direction$axis = direction.getAxis();
-                double px = direction$axis == Direction.Axis.X ? 0.5 + d0 * (double)direction.getStepX() : (double)random.nextFloat();
-                double py = direction$axis == Direction.Axis.Y ? 0.5 + d0 * (double)direction.getStepY() : (double)random.nextFloat();
-                double pz = direction$axis == Direction.Axis.Z ? 0.5 + d0 * (double)direction.getStepZ() : (double)random.nextFloat();
+        if (shape.isEmpty()) {
+            shape = Shapes.block(); // fallback: full cube
+        }
 
+        AABB box = shape.bounds();
+        double minX = box.minX;
+        double minY = box.minY;
+        double minZ = box.minZ;
+        double maxX = box.maxX;
+        double maxY = box.maxY;
+        double maxZ = box.maxZ;
+
+        double epsilon = 0.025;
+
+        for (Direction dir : Direction.values()) {
+            BlockPos blockpos = pos.relative(dir);
+            if (level.isEmptyBlock(blockpos)) {
+                double px, py, pz;
+
+                switch (dir.getAxis()) {
+                    case X -> {
+                        px = dir == Direction.EAST ? maxX + epsilon : minX - epsilon;
+                        py = random.nextDouble() * (maxY - minY) + minY;
+                        pz = random.nextDouble() * (maxZ - minZ) + minZ;
+                    }
+                    case Y -> {
+                        px = random.nextDouble() * (maxX - minX) + minX;
+                        py = dir == Direction.UP ? maxY + epsilon : minY - epsilon;
+                        pz = random.nextDouble() * (maxZ - minZ) + minZ;
+                    }
+                    case Z -> {
+                        px = random.nextDouble() * (maxX - minX) + minX;
+                        py = random.nextDouble() * (maxY - minY) + minY;
+                        pz = dir == Direction.SOUTH ? maxZ + epsilon : minZ - epsilon;
+                    }
+                    default -> throw new IllegalStateException("Unexpected axis: " + dir.getAxis());
+                }
                 level.addParticle(
                         ParticleTypes.ENCHANT, (double)pos.getX() + px, (double)pos.getY() + py, (double)pos.getZ() + pz, 0.0, 0.0, 0.0
                 );

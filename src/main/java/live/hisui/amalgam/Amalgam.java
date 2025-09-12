@@ -2,6 +2,7 @@ package live.hisui.amalgam;
 
 import live.hisui.amalgam.attachments.ModDataAttachments;
 import live.hisui.amalgam.blocks.ModBlocks;
+import live.hisui.amalgam.entities.ModEntities;
 import live.hisui.amalgam.items.ModItems;
 import live.hisui.amalgam.tabs.ModCreativeTabs;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -25,6 +26,8 @@ public class Amalgam {
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public Amalgam(IEventBus modEventBus, ModContainer modContainer) {
+
+        ModEntities.register(modEventBus);
 
         ModBlocks.register(modEventBus);
         ModItems.register(modEventBus);
