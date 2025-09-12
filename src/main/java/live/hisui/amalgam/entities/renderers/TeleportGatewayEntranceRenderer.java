@@ -31,7 +31,7 @@ public class TeleportGatewayEntranceRenderer extends EntityRenderer<TeleportGate
                 .setColor(255, 255, 255, 255)
                 .setUv(u, v)
                 .setOverlay(OverlayTexture.NO_OVERLAY)
-                .setLight(packedLight) // important: lightmap for shading
+                .setLight(packedLight)
                 .setNormal(poseStack.last(), 0.0F, 0.0F, 1.0F);
     }
 
@@ -41,27 +41,22 @@ public class TeleportGatewayEntranceRenderer extends EntityRenderer<TeleportGate
     public void render(TeleportGatewayEntranceEntity entity, float entityYaw, float partialTicks,
                        PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
         poseStack.pushPose();
-
-        // Face direction the entity is facing
+    
         poseStack.mulPose(Axis.YP.rotationDegrees(-entityYaw));
-
-        // Center quad on entity
         poseStack.translate(0.0D, 1.0D, 0.0D);
 
-        // Use block/entity cutout shader so it respects lighting
-        VertexConsumer vertexConsumer = buffer.getBuffer(RenderType.entityCutout(TEXTURE_LOCATION));
+        VertexConsumer vertexConsumer = buffer.getBuffer(RENDER_TYPE);
 
-        float halfWidth = 0.5F; // 1 block wide
-        float height = 2.0F;    // 2 blocks tall
+        float halfWidth = 0.5F;
+        float height = 2.0F;
 
-        // Quad vertices (two triangles)
         // Front face
         vertex(vertexConsumer, poseStack, -halfWidth, -1.0F, 0.0F, 0.0F, 1.0F, packedLight);
         vertex(vertexConsumer, poseStack, halfWidth, -1.0F, 0.0F, 1.0F, 1.0F, packedLight);
         vertex(vertexConsumer, poseStack, halfWidth, height - 1.0F, 0.0F, 1.0F, 0.0F, packedLight);
         vertex(vertexConsumer, poseStack, -halfWidth, height - 1.0F, 0.0F, 0.0F, 0.0F, packedLight);
 
-        // Back face (double sided)
+        // Back face
         vertex(vertexConsumer, poseStack, -halfWidth, -1.0F, 0.0F, 0.0F, 1.0F, packedLight);
         vertex(vertexConsumer, poseStack, -halfWidth, height - 1.0F, 0.0F, 0.0F, 0.0F, packedLight);
         vertex(vertexConsumer, poseStack, halfWidth, height - 1.0F, 0.0F, 1.0F, 0.0F, packedLight);
