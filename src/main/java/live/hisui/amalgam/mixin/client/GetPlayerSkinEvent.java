@@ -121,9 +121,7 @@ public abstract class GetPlayerSkinEvent extends Player {
         try {
             Amalgam.LOGGER.debug("WARNING! Sending stuff to Mojang API by HTTP! This is really not ideal, please open an issue on github if this happens!");
             // Make HTTP request to: https://api.mojang.com/users/profiles/minecraft/{username}
-            // Parse the JSON response to get the UUID
 
-            // Here's a basic example using Java's built-in HTTP client:
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create("https://api.mojang.com/users/profiles/minecraft/" + username))
@@ -131,13 +129,11 @@ public abstract class GetPlayerSkinEvent extends Player {
 
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             if (response.statusCode() == 200) {
-                // Parse JSON - you might want to use Gson here
-                // The response format is: {"id": "uuid-without-dashes", "name": "ActualUsername"}
                 JsonObject json = JsonParser.parseString(response.body()).getAsJsonObject();
                 String uuidString = json.get("id").getAsString();
 
                 client.close();
-                // Convert UUID string to UUID object (add dashes)
+                // Convert UUID string to UUID object (add dashes (I think theyre necessary? I havent had this method go off yeT))
                 return UUID.fromString(
                         uuidString.replaceFirst(
                                 "(\\p{XDigit}{8})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}+)",
