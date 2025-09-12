@@ -32,17 +32,13 @@ public class TeleportGatewayEntranceEntity extends Entity {
     public void tick() {
         super.tick();
 
-        // Save previous rotation for interpolation
         this.yRotO = this.getYRot();
 
-        // Increase yaw by 1 degree per tick
         this.setYRot(this.getYRot() + 1.0F);
 
-        // Sync head/body so the renderer doesn’t look weird
         this.setYHeadRot(this.getYRot());
         this.setYBodyRot(this.getYRot());
 
-        // Prevent float precision loss by normalizing every once in a while
         if (this.getYRot() > 1_000_000F) {
             float normalized = this.getYRot() % 360F;
             this.setYRot(normalized);
@@ -52,7 +48,7 @@ public class TeleportGatewayEntranceEntity extends Entity {
 
     @Override
     public void setYRot(float yRot) {
-        // Store unbounded (no Mth.wrapDegrees)
+        // dont do the boundedness
         this.yRot = yRot;
     }
 
