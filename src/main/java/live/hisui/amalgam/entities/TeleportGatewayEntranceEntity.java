@@ -1,5 +1,6 @@
 package live.hisui.amalgam.entities;
 
+import live.hisui.amalgam.Amalgam;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
