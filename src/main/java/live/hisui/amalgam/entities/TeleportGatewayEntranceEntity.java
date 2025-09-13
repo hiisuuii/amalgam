@@ -28,6 +28,7 @@ public class TeleportGatewayEntranceEntity extends Entity {
     @Override
     public InteractionResult interact(Player player, InteractionHand hand) {
         // TODO: spawn exit gateway at top solid y in facing direction, tp player to it
+        Amalgam.LOGGER.info("Interacted!");
         return super.interact(player, hand);
     }
 
