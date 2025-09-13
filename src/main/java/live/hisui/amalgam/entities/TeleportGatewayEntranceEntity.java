@@ -58,12 +58,12 @@ public class TeleportGatewayEntranceEntity extends Entity {
             this.setDamage(this.getDamage() + amount * 10.0F);
             this.gameEvent(GameEvent.ENTITY_DAMAGE, source.getEntity());
             boolean flag = source.getEntity() instanceof Player && ((Player)source.getEntity()).getAbilities().instabuild;
-            if ((flag || !(this.getDamage() > 40.0F))) {
+            if ((flag || !(this.getDamage() > 40.0F)) && true) {
                 if (flag) {
                     this.discard();
                 }
             } else {
-                this.kill();
+                this.discard();
             }
 
             return true;
